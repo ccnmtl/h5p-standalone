@@ -18,10 +18,13 @@
     "gulp-regenerator": "^5.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "bower": "^1.8.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bower": "bower install",
+    "build": "gulp default",
+    "demo": "gulp demo"
   },
   "repository": {
     "type": "git",
