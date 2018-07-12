@@ -11006,7 +11006,7 @@ H5P.ContentType = function (isRootLibrary, library) {
   return ContentType;
 };
 
-var H5P = H5P || {};
+var H5P = window.H5P = window.H5P || {};
 
 /**
  * The Event class for the EventDispatcher.
@@ -11265,7 +11265,7 @@ H5P.EventDispatcher = (function () {
   return EventDispatcher;
 })();
 
-var H5P = H5P || {};
+var H5P = window.H5P = window.H5P || {};
 
 /**
  * Used for xAPI events.
@@ -11583,7 +11583,7 @@ H5P.XAPIEvent.allowedXAPIVerbs = [
   'accessed-copyright'
 ];
 
-var H5P = H5P || {};
+var H5P = window.H5P = window.H5P || {};
 
 /**
  * The external event dispatcher. Others, outside of H5P may register and
@@ -11707,7 +11707,7 @@ H5P.xAPICompletedListener = function (event) {
 // TODO: Should we split up the generic parts needed by the editor(and others), and the parts needed to "run" H5Ps?
 
 /** @namespace */
-var H5P = H5P || {};
+var H5P = window.H5P = window.H5P || {};
 
 /**
  * Tells us if we're inside of an iframe.
@@ -12059,13 +12059,10 @@ H5P.init = function (target) {
 
   // Insert H5Ps that should be in iframes.
   H5P.jQuery('iframe.h5p-iframe:not(.h5p-initialized)', target).each(function () {
-    var contentId = H5P.jQuery(this).data('content-id');
-    if (('cid-' + contentId) in H5PIntegration.contents) {
-      this.contentDocument.open();
-      this.contentDocument.write('<!doctype html><html class="h5p-iframe"><head>' + H5P.getHeadTags(contentId) + '</head><body><div class="h5p-content" data-content-id="' + contentId + '"/></body></html>');
-      this.contentDocument.close();
-      H5P.jQuery(this).addClass('h5p-initialized');
-    }
+    var contentId = H5P.jQuery(this).addClass('h5p-initialized').data('content-id');
+    this.contentDocument.open();
+    this.contentDocument.write('<!doctype html><html class="h5p-iframe"><head>' + H5P.getHeadTags(contentId) + '</head><body><div class="h5p-content" data-content-id="' + contentId + '"/></body></html>');
+    this.contentDocument.close();
   });
 };
 
